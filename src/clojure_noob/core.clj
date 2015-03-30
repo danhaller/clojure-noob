@@ -354,3 +354,37 @@
 (concat (repeat 8 "na") ["Batman"])
 
 (take 3 (repeatedly (fn [] (rand-int 10))))
+
+(map identity {:sunlight-reaction "Glitter!"})
+(into {} (map identity {:sunlight-reaction "Glitter"}))
+
+(def breakfast (map identity [:garlic :sesame-oil :fried-eggs]))
+(into [] breakfast)
+(into [:bacon] breakfast)
+
+(conj [0] [1])
+(into [0] [1])
+(conj [0] 1)
+(conj [0] 1 2 3 4)
+
+(conj {:time "midnight"} [:place "ye olde cematarium"])
+(conj {:time "midnight"} {:place "ye olde cematarium"})
+
+(defn my-into
+  [target additions]
+  (apply conj target additions))
+
+(my-into [0] [1 2 3])
+
+(max 0 1 2)
+(max [0 1 2])
+(apply max [0 1 2])
+
+(def add10 (partial + 10))
+(add10 3)
+
+(def add-missing-elements
+  (partial conj ["water" "earth" "air"]))
+
+(add-missing-elements "unobtainium" "adamantium")
+(conj ["water" "earth" "air"] "unobtainium" "adamantium")
