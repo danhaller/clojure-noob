@@ -388,3 +388,15 @@
 
 (add-missing-elements "unobtainium" "adamantium")
 (conj ["water" "earth" "air"] "unobtainium" "adamantium")
+
+(defn identify-humans
+  [social-security-numbers]
+  (filter #(not (vampire? %))
+          (map vampire-related-details social-security-numbers)))
+
+(def not-vampire (complement vampire?))
+
+(defn identify-humans2
+  [social-security-numbers]
+  (filter not-vampire
+          (map vampire-related-details social-security-numbers)))
