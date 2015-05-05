@@ -400,3 +400,50 @@
   [social-security-numbers]
   (filter not-vampire
           (map vampire-related-details social-security-numbers)))
+
+(defn no-mutation
+  [x]
+  (println x)
+
+  (let [x "Kafka Human"]
+    (println x))
+
+  (println x))
+
+(no-mutation "Existential Angst Person")
+
+(defn sum
+  ([vals] (sum vals 0))
+  ([vals accumulating-total]
+    (if (empty? vals)
+    accumulating-total
+    (sum (rest vals) (+ (first vals) accumulating-total)))))
+
+(sum [1 2 3 4])
+
+(defn sum2
+  ([vals] (sum vals 0))
+  ([vals accumulating-total]
+    (if (empty? vals)
+    accumulating-total
+    (recur (rest vals) (+ (first vals) accumulating-total)))))
+
+(sum2 [1 2 3 4])
+
+(require '[clojure.string :as s])
+(defn clean [text]
+  (s/replace (s/trim text) #"lol" "LOL"))
+
+(clean "My boa constrictor is so sassy lol!   ")
+
+((comp clojure.string/lower-case clojure.string/trim) " Unclean string ")
+
+(defn sleepy-identity
+  "Returns the given value after 1 second"
+  [x]
+  (Thread/sleep 1000)
+  x)
+(sleepy-identity "Mr. Fred")
+
+(def memo-sleepy-identity (memoize sleepy-identity))
+(memo-sleepy-identity "Mr. Fantastico")
